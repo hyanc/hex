@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta content="width=device-width,initial-scale=1" name="viewport" />
+		<style>
+			body {text-align:center}
+			input,textarea {font-family:arial;display:block;margin:50px auto;font-size:24px;}
+			@media (prefers-color-scheme: dark) {body{background-color:#303131} #n{background-color:#4C4C49;color:#BBB7B0}}
+		</style>
+	</head>
+	<body>
+		<input id="str" placeholder="String" />
+		<input id="prefix" placeholder="Prefix" />
+		<input type="button" value="String to Hex" onclick="sth(true)" />
+		<input type="button" value="Hex to String" onclick="sth(false)" />
+		<textarea id="res" rows="6"></textarea>
+		<script>
+			function sth(th){
+				var str = document.getElementById("str").value,
+				prefix = document.getElementById("prefix").value,
+				res = document.getElementById("res"),
+				tmp = [];
+				if(th){
+					for(i=0;i<str.length;i++){
+						tmp[i] = prefix.toString()+str.charCodeAt(i).toString(16).slice(-4)
+					}
+				}
+				else {
+					str = str.split(prefix).join("");
+					for(i=0;i<str.length;i+=2){
+						tmp[i] = String.fromCharCode(parseInt(str.substr(i, 2), 16));
+					}
+				}
+				res.value = tmp.join("");
+			}
+		</script>
